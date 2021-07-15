@@ -1,0 +1,41 @@
+<div mat-subheader>
+  <button mat-raised-button color="primary" (click)="addClick()">Add</button>
+</div>
+<table mat-table [dataSource]="employees" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let employee">{{ employee.name }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef>Phone</th>
+    <td mat-cell *matCellDef="let employee">{{ employee.phone }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="jobTitle">
+    <th mat-header-cell *matHeaderCellDef>JobTitile</th>
+    <td mat-cell *matCellDef="let employee">{{ employee.jobTitle }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let employee">
+      <button mat-raised-button color="primary" (click)="editClick(employee)">
+        Edit
+      </button>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let employee">
+      <button mat-raised-button color="warn" (click)="deleteClick(employee)">
+        Delete
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
