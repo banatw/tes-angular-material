@@ -4,3 +4,11 @@ export interface Employee {
   phone: string;
   jobTitle: string;
 }
+
+
+export interface EmployeeData {
+  content: Employee[]
+  size: number,
+  totalElements: number,
+  totalPages: number
+}

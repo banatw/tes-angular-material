@@ -5,7 +5,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
-import { TesComponent } from './tes/tes.component';
 
 const routes: Routes = [
   {
@@ -26,10 +25,6 @@ const routes: Routes = [
       {
         path: 'employee',
         component: EmployeeComponent,
-      },
-      {
-        path: 'tes',
-        component: TesComponent,
       },
     ],
   },

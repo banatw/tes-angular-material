@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../models/employee';
+import { Employee, EmployeeData } from '../models/employee';
 import { EmployeeService } from '../services/employee.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-employee',
@@ -12,8 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
-  employees: Employee[] = [];
+  employees: EmployeeData | any
   displayedColumns: string[] = ['name', 'phone', 'jobTitle', 'edit', 'delete'];
+
 
   constructor(private service: EmployeeService, private dialog: MatDialog) {}
 
@@ -23,8 +23,8 @@ export class EmployeeComponent implements OnInit {
 
   getEmployees() {
     this.service
-      .getEmployees()
-      .subscribe((response: Employee[]) => (this.employees = response));
+      .getEmployeePaginate(0,10)
+      .subscribe((response: EmployeeData) => (this.employees = response));
   }
 
   editClick(emp: Employee) {
@@ -51,6 +51,14 @@ export class EmployeeComponent implements OnInit {
       this.getEmployees();
     });
 
-    //this.router.navigate(['./form'], { relativeTo: this.route });
+
+  }
+
+  onPageChange(event: PageEvent) {
+    let page = event.pageIndex
+    let size = event.pageSize
+    this.service
+      .getEmployeePaginate(page,size)
+      .subscribe((response: EmployeeData) => (this.employees = response));
   }
 }

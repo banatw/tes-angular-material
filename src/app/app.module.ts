@@ -29,7 +29,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmployeeFormComponent } from './employee/employee-form/employee-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TesComponent } from './tes/tes.component';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './services/auth.interceptor';
 
@@ -43,7 +42,6 @@ import { AuthInterceptor } from './services/auth.interceptor';
     // UserComponent,
     EmployeeComponent,
     EmployeeFormComponent,
-    TesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Employee } from '../models/employee';
+import { Employee, EmployeeData } from '../models/employee';
 import { Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class EmployeeService {
   private url: string = 'http://localhost:8080/employee';
   constructor(private http: HttpClient, private authService: AuthService) {}
-  private _listener: Subject<any> = new Subject<any>();
+  // private _listener: Subject<any> = new Subject<any>();
 
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.url}/all`, {});
@@ -33,11 +33,15 @@ export class EmployeeService {
     return this.http.delete<any>(`${this.url}/delete/${id}`);
   }
 
-  listen(): Observable<any> {
-    return this._listener.asObservable();
+  getEmployeePaginate(page: number, size: number): Observable<EmployeeData> {
+    return this.http.get<EmployeeData>(`${this.url}/all/${page}/${size}`)
   }
 
-  filter(filterBy: string) {
-    this._listener.next(filterBy);
-  }
+  // listen(): Observable<any> {
+  //   return this._listener.asObservable();
+  // }
+
+  // filter(filterBy: string) {
+  //   this._listener.next(filterBy);
+  // }
 }
